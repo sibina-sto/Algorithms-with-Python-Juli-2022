@@ -3,7 +3,7 @@ def print_board(board):
         print(' '.join(row))
     print()
 
-
+    
 def can_place_queen(row, col, rows, cols, left_diagonals, right_diagonals):
     if row in rows:
         return False
