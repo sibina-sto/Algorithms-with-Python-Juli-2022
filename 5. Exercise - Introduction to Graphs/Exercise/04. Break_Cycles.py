@@ -25,8 +25,7 @@ for _ in range(nodes):
   for child in children:
     edges.append((node, child))
 
-remove_edges = []
-
+removed_edges = []
     
 for source, destination in sorted(edges, key=lambda x: (x[0], x[1])):
   if destination not in graph[source] or source not in graph[destination]:
@@ -35,13 +34,12 @@ for source, destination in sorted(edges, key=lambda x: (x[0], x[1])):
   graph[destination].remove(source)
   
   if path_exists(source, destination, graph):
-    remove_edges.append((source, destination))
+    removed_edges.append((source, destination))
   else:
     graph[source].append(destination)
     graph[destination].append(source)
     
  
-print(f'Edges to remove: {len(remove_edges)}')
-for first, second remove_edge in remove_edges:
+print(f'Edges to remove: {len(removed_edges)}')
+for first, second in removed_edges:
   print(f'{first} - {second}')
-  
