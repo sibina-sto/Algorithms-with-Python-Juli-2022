@@ -1,9 +1,8 @@
-import sys
 from queue import PriorityQueue
 from collections import deque
 
 
-class Edges:
+class Edge:
     def __init__(self, source, destination, weight):
         self.source = source
         self.destination = destination
@@ -11,6 +10,7 @@ class Edges:
 
 
 edges = int(input())
+
 graph = {}
 
 for _ in range(edges):
@@ -20,6 +20,8 @@ for _ in range(edges):
     if destination not in graph:
         graph[destination] = []
     graph[source].append(Edge(source, destination, weight))
+
+# print(graph)
 
 start = int(input())
 target = int(input())
@@ -40,17 +42,15 @@ while not pq.empty():
         break
     for edge in graph[node]:
         new_distance = min_distance + edge.weight
-        if new_distance < distance[edge.deestination]:
-            distance[edge.deestination] = new_distance
-            parent[edge.deestination] = node
-            pq.put((new_distance, edge.deestination))
-
+        if new_distance < distance[edge.destination]:
+            distance[edge.destination] = new_distance
+            parent[edge.destination] = node
+            pq.put((new_distance, edge.destination))
 
 if distance[target] == float('inf'):
-    print('There is no such path.')
+    print("There is no such path.")
 else:
     print(distance[target])
-
     path = deque()
     node = target
     while node is not None:
